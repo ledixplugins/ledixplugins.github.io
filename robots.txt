@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://auraplugins.com.br/sitemap.xml
+Sitemap: https://ledixplugins.com.br/sitemap.xml
