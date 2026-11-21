@@ -1,0 +1,14 @@
+// Configuração do Cloudflare (Worker "ledixplugins-github-io").
+// O site é estático: o Cloudflare publica os arquivos desta pasta a cada push no main.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ledixplugins-github-io",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./",
+    // Página que não existe → mostra o 404.html com status 404.
+    "not_found_handling": "404-page",
+    // /aurabass → /aurabass/ (igual ao GitHub Pages).
+    "html_handling": "auto-trailing-slash"
+  }
+}

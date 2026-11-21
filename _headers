@@ -1,0 +1,26 @@
+# Cabeçalhos do Cloudflare Pages (o GitHub Pages ignora este arquivo).
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Fontes não mudam: cache de 1 ano.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imagens e PDF: 1 semana (não têm versão no nome).
+/assets/*.jpg
+  Cache-Control: public, max-age=604800
+/assets/*.png
+  Cache-Control: public, max-age=604800
+/*/img/*
+  Cache-Control: public, max-age=604800
+/*/manual/img/*
+  Cache-Control: public, max-age=604800
+/*.pdf
+  Cache-Control: public, max-age=604800
+
+# Arquivos de verificação e erro não entram no Google.
+/googlec38a5478f64f9824.html
+  X-Robots-Tag: noindex

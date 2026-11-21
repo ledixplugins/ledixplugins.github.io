@@ -1,0 +1,8 @@
+# Arquivos que NÃO são publicados no site pelo Cloudflare.
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+.wrangler
+node_modules
+CNAME

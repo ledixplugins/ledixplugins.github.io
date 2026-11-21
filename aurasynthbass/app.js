@@ -5,7 +5,10 @@
   "use strict";
 
   var DEMO_URL = "https://ledixplugins.github.io/Synth/?demo=1";
-  var DEMO_ORIGIN = "https://ledixplugins.github.io";
+  /* A demo vem do GitHub Pages. Enquanto o domínio próprio estiver ligado lá,
+     o github.io redireciona para ledixplugins.com.br; depois da migração para
+     o Cloudflare ela fica no github.io. Aceita as duas origens. */
+  var DEMO_ORIGINS = ["https://ledixplugins.github.io", "https://ledixplugins.com.br"];
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function clamp(v, a, b) { return Math.min(Math.max(v, a), b); }
@@ -281,7 +284,7 @@
   sheetClose.addEventListener("click", closeDemo);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDemo(); });
   window.addEventListener("message", function (e) {
-    if (e.origin === DEMO_ORIGIN && e.data && e.data.aura === "close") closeDemo();
+    if (DEMO_ORIGINS.indexOf(e.origin) !== -1 && e.data && e.data.aura === "close") closeDemo();
   });
 
   /* ---------- Sistema recomendado ---------- */
