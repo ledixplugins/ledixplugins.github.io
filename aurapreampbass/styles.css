@@ -480,3 +480,10 @@ em { font-style: normal; color: var(--amber-500); }
   .more-text { padding: var(--s-600); }
   .more-art { padding: var(--s-400); }
 }
+
+.nav-home { gap: var(--s-100); }
+.nav-home b { font-size: 18px; line-height: 28px; font-weight: 700; letter-spacing: 0.12em; font-variation-settings: "wdth" 100; }
+.nav-home { text-decoration: none; }
+.nav-home img { flex-shrink: 0; }
+.nav-brand b, .nav .btn { white-space: nowrap; }
+@media (max-width: 639px) { .nav-home b { display: none; } .nav-brand b { font-size: 13px; letter-spacing: 0.04em; } .nav .btn { padding-left: var(--s-150, 14px); padding-right: var(--s-150, 14px); } }
