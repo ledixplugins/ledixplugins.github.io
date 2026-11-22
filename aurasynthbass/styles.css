@@ -443,37 +443,3 @@ em { font-style: normal; color: var(--amber-500); }
 .install-steps dd { margin: 0; }
 @media (max-width: 520px) { .install-steps div { grid-template-columns: 1fr; gap: 2px; } }
 .footer-legal { flex-basis: 100%; margin: var(--s-200, 12px) 0 0; text-align: center; line-height: 1.6; }
-
-/* ---------- Navegação entre plugins ---------- */
-.nav-home {
-  display: flex; align-items: center;
-  padding-right: var(--s-200); margin-right: calc(-1 * var(--s-100));
-  border-right: 1px solid rgba(242, 237, 230, 0.12);
-  opacity: 0.85; transition: opacity 300ms var(--ease);
-}
-.nav-home:hover { opacity: 1; }
-.nav-home img { display: block; width: 28px; height: 28px; }
-.nav-out { padding-left: var(--s-300); border-left: 1px solid rgba(242, 237, 230, 0.12); }
-
-/* ---------- 11. Outros plugins ---------- */
-.more { padding: 0 0 var(--section); }
-.more-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-100) var(--s-300); margin-bottom: var(--s-400); }
-.more-card { display: grid; background: var(--bg-panel); border: 1px solid rgba(242,237,230,.08); border-radius: 20px; overflow: hidden; }
-.more-text { padding: var(--s-400) var(--s-300); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: var(--s-200); }
-.more-text .actions { justify-content: flex-start; }
-.more-art { position: relative; padding: var(--s-300); display: grid; place-items: center; background: radial-gradient(closest-side, rgba(245,165,36,.14), transparent), var(--bg-base); }
-.more-art img { width: 100%; height: auto; border-radius: 6px; filter: drop-shadow(0 24px 40px rgba(0,0,0,.6)); }
-.chips { display: flex; flex-wrap: wrap; gap: var(--s-75); list-style: none; margin: 0; padding: 0; }
-.chips li { padding: 4px 10px; border: 1px solid rgba(242,237,230,.14); border-radius: 999px; color: var(--text-muted); }
-@media (min-width: 900px) {
-  .more-card { grid-template-columns: 1fr 1.2fr; }
-  .more-text { padding: var(--s-600); }
-  .more-art { padding: var(--s-400); }
-}
-
-.nav-home { gap: var(--s-100); }
-.nav-home b { font-size: 18px; line-height: 28px; font-weight: 700; letter-spacing: 0.12em; font-variation-settings: "wdth" 100; }
-.nav-home { text-decoration: none; }
-.nav-home img { flex-shrink: 0; }
-.nav-brand b, .nav .btn { white-space: nowrap; }
-@media (max-width: 639px) { .nav-home b { display: none; } .nav-brand b { font-size: 13px; letter-spacing: 0.04em; } .nav .btn { padding-left: var(--s-150, 14px); padding-right: var(--s-150, 14px); } }
