@@ -236,7 +236,7 @@
 
   function openDemo() {
     lastFocus = document.activeElement;
-    loading.innerHTML = 'Ligando o AURA Synth Bass <span class="cursor" aria-hidden="true"></span>';
+    loading.innerHTML = 'Ligando o AURA <span class="cursor" aria-hidden="true"></span>';
     loading.hidden = false;
     demo = document.createElement("iframe");
     demo.src = DEMO_URL;
