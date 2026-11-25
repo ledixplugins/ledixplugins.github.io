@@ -21,8 +21,9 @@ fi
 
 git diff --name-only "$ANTES" "$DEPOIS" | while IFS= read -r arq; do
   case "$QUEM" in
-    ledixplugins) area_thiago "$arq" || echo "$arq" ;;
-    lednard-UI)   area_thiago "$arq" && echo "$arq" ;;
+    ledixplugins) if ! area_thiago "$arq"; then echo "$arq"; fi ;;
+    lednard-UI)   if area_thiago "$arq"; then echo "$arq"; fi ;;
     *)            echo "$arq" ;;   # conta que não está na divisão: avisa tudo
   esac
 done
+exit 0
