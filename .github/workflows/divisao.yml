@@ -1,0 +1,60 @@
+# Robô da divisão: a cada envio para o main, confere se quem enviou mexeu só na própria área.
+#   Thiago (ledixplugins): synth/, demo/ e o PDF do manual do Synth.
+#   Lednard (lednard-UI): todo o resto (páginas, assets, header, footer, cards).
+# Não bloqueia nada. Se alguém mexer na área do outro, abre um aviso (issue) e
+# marca os dois, e o GitHub manda e-mail. A lista das áreas fica em .github/scripts/divisao.sh.
+name: divisao
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  divisao:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Confere os arquivos do envio
+        id: confere
+        env:
+          QUEM: ${{ github.event_name == 'pull_request' && github.event.pull_request.user.login || github.actor }}
+          ANTES: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          DEPOIS: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: |
+          fora=$(bash .github/scripts/divisao.sh "$QUEM" "$ANTES" "$DEPOIS")
+          if [ -z "$fora" ]; then
+            echo "Tudo certo: $QUEM mexeu só na própria área."
+            exit 0
+          fi
+          echo "Arquivos fora da área de $QUEM:"; echo "$fora"
+          { echo 'fora<<FIM'; echo "$fora"; echo 'FIM'; } >> "$GITHUB_OUTPUT"
+          echo "quem=$QUEM" >> "$GITHUB_OUTPUT"
+
+      - name: Avisa os dois
+        if: steps.confere.outputs.fora != '' && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          QUEM: ${{ steps.confere.outputs.quem }}
+          FORA: ${{ steps.confere.outputs.fora }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          lista=$(printf '%s\n' "$FORA" | sed 's/^/- `/; s/$/`/')
+          corpo=$(printf '@lednard-UI @ledixplugins\n\nO envio [%s](%s/%s/commit/%s) de **%s** mexeu em arquivos da área do outro:\n\n%s\n\nSe foi combinado, é só fechar este aviso. Se não foi, confiram se nada foi desfeito (por exemplo, uma cópia antiga substituindo a versão atual).\n\nDivisão: Thiago cuida de `synth/`, `demo/` e do PDF do manual. Lednard cuida do resto do site.' \
+            "${COMMIT:0:7}" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$COMMIT" "$QUEM" "$lista")
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Aviso: envio de $QUEM mexeu na área do outro" \
+            --body "$corpo"
+
+      - name: Marca o PR como fora da divisão
+        if: steps.confere.outputs.fora != '' && github.event_name == 'pull_request'
+        run: |
+          echo "::warning::Este PR mexe em arquivos da área do outro. Vale avisar antes do merge."
+          exit 1
