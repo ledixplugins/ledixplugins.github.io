@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var DEMO_URL = "/demo/?demo=1";
+  var DEMO_URL = "/synth/?demo=1";
   /* A demo vem do GitHub Pages. Enquanto o domínio próprio estiver ligado lá,
      o github.io redireciona para ledixplugins.com.br; depois da migração para
      o Cloudflare ela fica no github.io. Aceita as duas origens. */
