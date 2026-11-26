@@ -1,4 +1,4 @@
-/* AURA Preamp Bass — rolagem conceitual.
+/* AURA Pad — rolagem conceitual.
    Um único laço de rolagem (requestAnimationFrame) move a abertura, o zoom
    e a frase que acende palavra por palavra. */
 (function () {

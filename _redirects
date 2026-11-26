@@ -1,0 +1,5 @@
+# AURA Preamp Bass saiu do site: os links antigos levam para a página inicial.
+/aurapreampbass / 301
+/aurapreampbass/* / 301
+/aurabass / 301
+/aurabass/* / 301
