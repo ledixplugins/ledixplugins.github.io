@@ -486,3 +486,8 @@ em { font-style: normal; color: var(--amber-500); }
 .use { background: var(--bg-panel); border: 1px solid rgba(242,237,230,.08); border-radius: 16px; padding: var(--s-300); }
 .use h3 { margin: 0 0 var(--s-75); }
 @media (min-width: 768px) { .uses-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Quebras de linha equilibradas, sem palavra sozinha na última linha */
+h1, h2, h3, h4, .statement-text, .intro-sub, .hero-sub { text-wrap: balance; }
+p, dd, li { text-wrap: pretty; }
+.ln { display: inline-block; max-width: 100%; }
