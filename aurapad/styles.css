@@ -487,3 +487,12 @@ em { font-style: normal; color: var(--amber-500); }
 .nav-home img { flex-shrink: 0; }
 .nav-brand b, .nav .btn { white-space: nowrap; }
 @media (max-width: 639px) { .nav-home b { display: none; } .nav-brand b { font-size: 13px; letter-spacing: 0.04em; } .nav .btn { padding-left: var(--s-150, 14px); padding-right: var(--s-150, 14px); } }
+
+/* ---------- Do culto ao estúdio ---------- */
+.uses { padding: var(--section) 0; }
+.uses .kicker { text-align: center; }
+.uses h2 { text-align: center; margin-bottom: var(--s-600); }
+.uses-grid { display: grid; gap: var(--s-200); }
+.use { background: var(--bg-panel); border: 1px solid rgba(242,237,230,.08); border-radius: 16px; padding: var(--s-300); }
+.use h3 { margin: 0 0 var(--s-75); }
+@media (min-width: 768px) { .uses-grid { grid-template-columns: repeat(3, 1fr); } }

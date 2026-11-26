@@ -167,3 +167,8 @@ em { font-style: normal; color: var(--amber-500); }
 @media (prefers-reduced-motion: reduce) { .rv { transform: none; transition: opacity 300ms var(--ease); } }
 .footer a { display: inline-block; padding: 14px 6px; }
 .nav-links a { display: inline-block; padding: 12px 0; }
+
+.worship { padding-bottom: var(--section); }
+.worship .kicker { margin-bottom: var(--s-100); }
+.worship h2 { margin-bottom: var(--s-400); }
+.worship .points { padding-bottom: 0; }
