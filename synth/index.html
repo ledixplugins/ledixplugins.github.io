@@ -32,6 +32,24 @@
       if(d.scrollHeight > window.innerHeight+2){ var W2=Math.ceil(W*d.scrollHeight/window.innerHeight)+4; set(W2); d.style.setProperty('--dz',(W2/w).toFixed(3)); }
     },350);
   }
+  // Sem rolagem em nenhuma tela: se o painel for mais alto ou mais largo que a janela, ele encolhe até caber (e volta ao normal se a janela crescer)
+  var zt=0;
+  function cabe(){
+    var s=document.querySelector('.synth'); if(!s || document.documentElement.classList.contains('rot')) return;
+    s.style.zoom='';
+    var h=s.scrollHeight, w=s.scrollWidth, ih=window.innerHeight, iw=window.innerWidth;
+    if(h<=ih+1 && w<=iw+1) return;
+    var z=Math.max(0.3, Math.min(ih/h, iw/w)*0.995); s.style.zoom=z.toFixed(4);
+    for(var i=0;i<3;i++){                   // confere o resultado real e corrige se ainda passar
+      var r=s.getBoundingClientRect();
+      if(r.bottom<=ih+1 && r.right<=iw+1) break;
+      z=Math.max(0.3, z*Math.min(ih/r.bottom, iw/r.right)*0.995); s.style.zoom=z.toFixed(4);
+    }
+  }
+  function cabeLogo(){ clearTimeout(zt); zt=setTimeout(cabe,60); }
+  window.addEventListener('load',function(){ cabe(); setTimeout(cabe,600); });
+  window.addEventListener('resize',cabeLogo); window.addEventListener('orientationchange',function(){ setTimeout(cabe,350); });
+  window.auraCabe=cabe;
   fit(); window.addEventListener('orientationchange',function(){ last=''; setTimeout(fit,200); });
   window.addEventListener('resize',function(){ setTimeout(fit,100); });
   if(screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change',function(){ last=''; setTimeout(fit,200); });
@@ -54,7 +72,7 @@
     --ink:#15171a; --ink2:#454a52; --amber:#ffab2e; --led:#ff5a36; --ok:#3ddc84; --oled:#7fe9ff; --red:#d8421c; --pad:clamp(10px,1.6vw,22px);
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;height:100%;background:#0b0a09;color:var(--ink);overscroll-behavior:none;
+  html,body{margin:0;height:100%;overflow:hidden;background:#0b0a09;color:var(--ink);overscroll-behavior:none;
     font-family:"Avenir Next","Futura","Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-user-select:none;user-select:none;touch-action:manipulation}
   .mono{font-family:"SF Mono",Menlo,Consolas,monospace}
