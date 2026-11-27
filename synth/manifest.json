@@ -1,6 +1,6 @@
 {
- "name": "AURA Synth Bass",
- "short_name": "AURA Bass",
+ "name": "AURA Synth",
+ "short_name": "AURA Synth",
  "start_url": "./",
  "scope": "./",
  "display": "fullscreen",

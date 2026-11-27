@@ -4,10 +4,13 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "ledixplugins-github-io",
   "compatibility_date": "2025-09-01",
-  // Script que serve o AURA Tone na raiz de tone.ledixplugins.com.br.
+  // Script que serve o AURA Tone e o AURA Synth na raiz dos seus subdomínios.
   "main": "./worker.js",
-  // Endereço próprio do AURA Tone (o Cloudflare cria o DNS sozinho).
-  "routes": [{ "pattern": "tone.ledixplugins.com.br", "custom_domain": true }],
+  // Endereços próprios (o Cloudflare cria o DNS sozinho): AURA Tone e a versão online secreta do AURA Synth.
+  "routes": [
+    { "pattern": "tone.ledixplugins.com.br", "custom_domain": true },
+    { "pattern": "synth.ledixplugins.com.br", "custom_domain": true }
+  ],
   "assets": {
     "binding": "ASSETS",
     "run_worker_first": true,

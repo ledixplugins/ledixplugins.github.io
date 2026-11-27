@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta name="robots" content="noindex">
+<meta name="robots" content="noindex, nofollow">
 <!--
-  AURA Synth Bass — sintetizador de baixo para navegador.
+  AURA Synth — sintetizador de baixo para navegador.
   Criação e direção: Thiago R. Galvão (GitHub: thiagorgalvao-sketch), 2026.
   © 2026 Thiago R. Galvão. Todos os direitos reservados.
   Proibida a cópia, redistribuição, modificação ou uso comercial sem autorização por escrito.
@@ -66,7 +66,7 @@
 <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="theme-color" content="#0b0a09">
-<title>AURA Synth Bass</title>
+<title>AURA Synth</title>
 <style>
   :root{
     --ink:#15171a; --ink2:#454a52; --amber:#ffab2e; --led:#ff5a36; --ok:#3ddc84; --oled:#7fe9ff; --red:#d8421c; --pad:clamp(10px,1.6vw,22px);
@@ -646,7 +646,7 @@
     <div class="panel">
       <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
       <div class="top">
-        <div class="brand"><svg class="wordmark" viewBox="0 0 540 160" role="img" aria-label="AURA"><g fill="none" stroke="#1b1d20" stroke-width="22"><polyline points="20,148 70,16 120,148"/><path d="M160 16 V96 a40 40 0 0 0 80 0 V16"/><path d="M290 148 V27 H337 a32 32 0 0 1 0 64 H290 M334 91 L378 148"/><polyline points="420,148 470,16 520,148"/></g><g fill="none" stroke="#E8890C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M40 104 C 52 84, 58 84, 70 104 S 88 124, 100 104"/><path d="M440 108 H456 V92 H484 V108 H500"/></g></svg><span>SYNTH BASS</span></div>
+        <div class="brand"><svg class="wordmark" viewBox="0 0 540 160" role="img" aria-label="AURA"><g fill="none" stroke="#1b1d20" stroke-width="22"><polyline points="20,148 70,16 120,148"/><path d="M160 16 V96 a40 40 0 0 0 80 0 V16"/><path d="M290 148 V27 H337 a32 32 0 0 1 0 64 H290 M334 91 L378 148"/><polyline points="420,148 470,16 520,148"/></g><g fill="none" stroke="#E8890C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M40 104 C 52 84, 58 84, 70 104 S 88 124, 100 104"/><path d="M440 108 H456 V92 H484 V108 H500"/></g></svg><span>SYNTH</span></div>
         <div class="leds" aria-hidden="true">
           <div class="lamp g" id="lPwr"><i></i><b>POWER</b></div><div class="lamp a" id="lMidi"><i></i><b>MIDI</b></div><div class="lamp g" id="lGate"><i></i><b>GATE</b></div><div class="lamp a" id="lArpLed"><i></i><b>ARP</b></div><div class="lamp r" id="lOvl"><i></i><b>OVERLOAD</b></div>
         </div>
@@ -731,7 +731,7 @@
         <div class="sec"><h2>REVERB</h2><div class="ctrls"><div class="sel"><button id="fxT3" class="btn fxb">OFF</button><div class="cap2">REVERB</div></div><div id="sec_fx3" class="ctrls"></div></div></div>
       </div>
     </div>
-    <div class="arm" aria-hidden="true"><div class="plate lx"><i class="ldx"></i></div><div class="plate"><b>AURA</b><small>SYNTH BASS</small></div></div>
+    <div class="arm" aria-hidden="true"><div class="plate lx"><i class="ldx"></i></div><div class="plate"><b>AURA</b><small>SYNTH</small></div></div>
     <div class="keysWrap">
       <div class="felt"></div>
       <div class="play">
@@ -834,7 +834,7 @@
   <div id="mNone" class="ios-f" hidden>Nenhum ajuste encontrado.</div>
   <p class="ios-f">Gire os knobs arrastando para cima e para baixo. Toque duplo volta ao valor salvo, marcado pelo ponto vermelho. Toque no visor para abrir a lista de presets. Pitch bend: +2 semitons acima, −12 abaixo. A roda MOD (CC1) adiciona vibrato. O cadeado trava os controles da tela.</p>
   <p id="engineInfo"></p>
-  <p class="about"><i class="ldx ldx-about" role="img" aria-label="Ledix Plugins"></i>AURA SYNTH BASS · criado por Thiago R. Galvão · © 2026 · Todos os direitos reservados</p>
+  <p class="about"><i class="ldx ldx-about" role="img" aria-label="Ledix Plugins"></i>AURA SYNTH · criado por Thiago R. Galvão · © 2026 · Todos os direitos reservados</p>
   <input id="fileIn" type="file" accept=".syx,.mdp,.json,application/json" multiple hidden>
 </div></div>
 
@@ -884,9 +884,12 @@
 <script>
 (function(){
   const AURA_AUTOR='Thiago R. Galvão', AURA_ANO=2026, AURA_ID='AURA-SB-TRG-2026';
-  try{ console.log('%cAURA SYNTH BASS%c © 2026 '+AURA_AUTOR+' — todos os direitos reservados','font-weight:700;color:#e8a33d','');}catch(e){ dbg(e); }
+  try{ console.log('%cAURA SYNTH%c © 2026 '+AURA_AUTOR+' — todos os direitos reservados','font-weight:700;color:#e8a33d','');}catch(e){ dbg(e); }
   const $ = id => document.getElementById(id);
   const LS = { get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } } };
+  // Presets de fábrica renomeados: favoritos, setlist e backups antigos passam a usar o nome novo
+  const RENOMEADOS={'CHURCH SYNTH BASS':'WORSHIP SYNTH BASS'}, novoNome=n=>RENOMEADOS[n]||n;
+  ['aura_favs_v1','aura_setlist_v1'].forEach(k=>{ const v=LS.get(k,null); if(Array.isArray(v) && v.some(x=>RENOMEADOS[x])) LS.set(k, v.map(novoNome)); });
 
   // ---- ajustes globais (não fazem parte do preset): afinação, faixa da roda, curva de toque, MIDI, entrada externa
   const GKEY='aura_glob_v1';
@@ -953,7 +956,7 @@
   const F = p => Object.assign(norm(p), {factory:true});
   const FACTORY = [
     // Destaque (sempre o primeiro da lista)
-    F({name:'CHURCH SYNTH BASS', oct:-2, wave:'square', lvl:1.0, sub:0, cut:0.0560, fenv:1.04, kt:0.667, glide:0, a:0.002, d:0.25, s:0.60, r:0.25, vol:1.69}),
+    F({name:'WORSHIP SYNTH BASS', oct:-2, wave:'square', lvl:1.0, sub:0, cut:0.0560, fenv:1.04, kt:0.667, glide:0, a:0.002, d:0.25, s:0.60, r:0.25, vol:1.69}),
     // Sub
     F({name:'DEEP SUB BASS', oct:-1, wave:'square',   lvl:0.75, sub:0.35, cut:0.41, fenv:0.8, kt:0, glide:0.03,  a:0.008, d:0.295, s:0.59, r:0.19, vol:1.57}),
     F({name:'SUB BASS', oct:-2, wave:'sawtooth', sw:1, lvl:0.62, sub:0.62, cut:0.35, res:0.40, fenv:0.39, kt:0.20, drv:0.50, ovl:0.40,
@@ -1041,7 +1044,7 @@
     F({name:'ZAP + PING', oct:1, wave:'triangle', lvl:1.0, w2:'triangle', o2:1, d2:0, l2:0.16, w3:'triangle', o3:-3, d3:0, k3:1, l3:0.15, sub:0, cut:0.30, res:0, fenv:3.5, fa:0.2, fd:0.5, fs:1, fr:0.1, kt:0, pa:24, pd:0.09,
        a:0.003, d:0.90, s:0.20, r:0.06, vol:1.79, efx:{d:0, m:0, rv:0}}),
   ];
-  const FAMILIAS = [["CHURCH", ["CHURCH SYNTH BASS"]], ["SUB", ["DEEP SUB BASS", "SUB BASS", "SUB BASS (SOFT)", "SUB BASS (HARD)", "SUB BASS (808)", "SUB", "SUB AGRO", "SUB ARP", "SUB AGRO ARP"]], ["DRIVE", ["DRIVE", "DRIVE (STAGE 2)", "DRIVE (SOFT)", "DRIVE (HEAVY)", "BAD!BASS"]], ["OCTAVE", ["OCTAVE (CLEAN)", "OCTAVE (WILD)", "OCTAVE (SOFT)", "OCTAVE (HARD)"]], ["FUNK, POP E ROCK", ["FUNK (PLUCK)", "FUNK (SLAP)", "POP (ROUND)", "ROCK (GRIT)", "$24$"]], ["LEAD", ["LEAD (MONO)", "LEAD (SOFT)", "DUO-GLIDE"]], ["PLUCK", ["PLUCK (SHORT)", "PLUCK (WARM)", "HRD PLUCK"]], ["CHORUS E ESPECIAIS", ["CHORUS", "CHORUS (WIDE)", "ANGRY DROP", "SINE PING", "ZAP DROP", "ZAP + PING"]]];   // título de cada grupo na lista de presets
+  const FAMILIAS = [["WORSHIP", ["WORSHIP SYNTH BASS"]], ["SUB", ["DEEP SUB BASS", "SUB BASS", "SUB BASS (SOFT)", "SUB BASS (HARD)", "SUB BASS (808)", "SUB", "SUB AGRO", "SUB ARP", "SUB AGRO ARP"]], ["DRIVE", ["DRIVE", "DRIVE (STAGE 2)", "DRIVE (SOFT)", "DRIVE (HEAVY)", "BAD!BASS"]], ["OCTAVE", ["OCTAVE (CLEAN)", "OCTAVE (WILD)", "OCTAVE (SOFT)", "OCTAVE (HARD)"]], ["FUNK, POP E ROCK", ["FUNK (PLUCK)", "FUNK (SLAP)", "POP (ROUND)", "ROCK (GRIT)", "$24$"]], ["LEAD", ["LEAD (MONO)", "LEAD (SOFT)", "DUO-GLIDE"]], ["PLUCK", ["PLUCK (SHORT)", "PLUCK (WARM)", "HRD PLUCK"]], ["CHORUS E ESPECIAIS", ["CHORUS", "CHORUS (WIDE)", "ANGRY DROP", "SINE PING", "ZAP DROP", "ZAP + PING"]]];   // título de cada grupo na lista de presets
   const FAMILIA_DE = {}; FAMILIAS.forEach(([f,l])=>l.forEach(n=>FAMILIA_DE[n]=f));
   const UKEY='aura_user_presets_v1', LKEY='aura_last_preset_v1', FKEY='aura_favs_v1', FOKEY='aura_fav_only_v1';
   const asList = v => Array.isArray(v) ? v : [];
@@ -1494,7 +1497,7 @@
     S('bender_on_t',p.pa>0?1:0); if(p.pa>0){ S('bender_depth_k',Math.min(1,p.pa/24)); S('bender_time_k',inv(p.pd)); }
     S('delay_on_t',0); S('osc_modulation_t',0); S('filter_modulation_t',0); S('arp_on_t',0); S('syn_volume_k',Math.min(1,p.vol/4.267));
     const nm=String(p.name).replace(/"/g,''), f6=x=>(+x).toFixed(6);
-    return '{\n\t"globals": {\n\t\t"ver": 1,\n\t\t"description": "AURA Synth Bass",\n\t\t"bank": "AURA",\n\t\t"name": "'+nm+'",\n\t\t"octave": 48,\n\t\t"tempo": 120.000000,\n\t\t"pbrange": 2,\n\t\t"mwrange": 1.000000,\n\t},\n'
+    return '{\n\t"globals": {\n\t\t"ver": 1,\n\t\t"description": "AURA Synth",\n\t\t"bank": "AURA",\n\t\t"name": "'+nm+'",\n\t\t"octave": 48,\n\t\t"tempo": 120.000000,\n\t\t"pbrange": 2,\n\t\t"mwrange": 1.000000,\n\t},\n'
       +'\t"arpeggiator": {\n\t\t"sortOrder": 2,\n\t\t"velocityMode": 0,\n\t\t"direction": 0,\n\t\t"stepSize": 4,\n\t\t"octaveRange": 0,\n\t\t"patternLength": 0,\n\t},\n'
       +'\t"mapping": {\n\t\t"syn_glide_k": [72, 0],\n\t\t"syn_volume_k": [7, 0],\n\t\t"vcf_freq_k": [74, 0],\n\t\t"vcf_regen_k": [71, 0],\n\t\t"amount_contour_k": [24, 0],\n\t\t"syn_hold_t": [64, 0],\n\t},\n'
       +'\t"params": {\n'+Object.keys(q).map(k=>'\t\t"'+k+'": '+f6(q[k])+',\n').join('')+'\t}\n}\n';
@@ -1536,7 +1539,7 @@
     const data={aura:1, ver:2, origem:AURA_ID+' © '+AURA_ANO+' '+AURA_AUTOR, presets:USER, favs:[...favs], ccMap:ccMap, actMap:actMap, setlist:setlist};
     try{
       const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,1)],{type:'application/json'}));
-      a.download='aura-synth-bass-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+      a.download='aura-synth-backup.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
       say(USER.length+' preset(s) exportado(s)');
     }catch(e){ say('Não foi possível exportar'); }
   }
@@ -1595,8 +1598,8 @@
           if(j && j.aura){
             if(j.ver>2) extra+=' · arquivo de versão mais nova: parâmetros desconhecidos foram ignorados';
             got=asList(j.presets).filter(p=>p&&typeof p==='object'&&typeof p.name==='string').slice(0,500);
-            asList(j.favs).forEach(x=>{ if(typeof x==='string') favs.add(x); }); LS.set(FKEY,[...favs]);
-            if(j.ccMap){ ccMap=cleanCC(j.ccMap); LS.set(MAPKEY,ccMap); } if(j.actMap){ actMap=cleanAct(j.actMap); LS.set(ACTKEY,actMap); } drawMap(); if(j.setlist){ setlist=asList(j.setlist).filter(x=>typeof x==='string').slice(0,200); saveSet(); } extra=' + ajustes';
+            asList(j.favs).forEach(x=>{ if(typeof x==='string') favs.add(novoNome(x)); }); LS.set(FKEY,[...favs]);
+            if(j.ccMap){ ccMap=cleanCC(j.ccMap); LS.set(MAPKEY,ccMap); } if(j.actMap){ actMap=cleanAct(j.actMap); LS.set(ACTKEY,actMap); } drawMap(); if(j.setlist){ setlist=asList(j.setlist).filter(x=>typeof x==='string').map(novoNome).slice(0,200); saveSet(); } extra=' + ajustes';
           } else { const p=fromMdp(txt); if(p) got=[p]; }
         }
         if(!got.length){ bad++; continue; }
@@ -2532,7 +2535,7 @@
 </script>
 <script>document.querySelectorAll(".seg.lever").forEach(function(g){if(g.querySelectorAll("button").length===2)g.classList.add("rk")});</script>
 <script>
-/* AURA Synth Bass — modo demonstração (só quando a página é aberta com ?demo=1, como no site de vendas).
+/* AURA Synth — modo demonstração (só quando a página é aberta com ?demo=1, como no site de vendas).
    © 2026 Thiago R. Galvão. 5 minutos de áudio por navegador a cada 12 horas; depois, convite para baixar o teste de 15 dias. */
 (function(){
   const dbg=function(e){ try{ if(window.auraDbg) window.auraDbg(e); }catch(_){ /* só registro */ } };
