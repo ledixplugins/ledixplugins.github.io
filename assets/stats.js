@@ -14,7 +14,7 @@
     var h=a.getAttribute('href')||'',id=a.id||'';
     var m=h.match(/releases\/latest\/download\/AURA-([A-Za-z-]+?)-(Windows|macOS)\.(exe|pkg)/);
     if(m){ev('download/'+m[1].toLowerCase()+'-'+m[2].toLowerCase());return}
-    if(/\/auratone\/app\/?$/.test(h)){ev('abrir/aura-tone');return}
+    if(/tone\.ledixplugins\.com\.br\/?$/.test(h)||/\/auratone\/app\/?$/.test(h)){ev('abrir/aura-tone');return}
     if(id==='demoBtn'||a.hasAttribute('data-demo')){ev('demo/synthbass');return}
     if(/\.pdf$/.test(h)){ev('manual/pdf');return}
     if(/#baixar$/.test(h)||h==='#baixar'){ev('clique/ir-para-baixar')}
