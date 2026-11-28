@@ -1,16 +1,30 @@
 <!DOCTYPE html>
+<!-- AURA Tone — © 2026 Thiago R. Galvão. Todos os direitos reservados. ID: AURA-TN-TRG-2026 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="author" content="Thiago R. Galvão">
+<meta name="copyright" content="© 2026 Thiago R. Galvão. Todos os direitos reservados.">
+<meta name="generator" content="AURA-TN-TRG-2026">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0a09">
 <title>AURA Tone · descubra o tom da música, grátis</title>
-<meta name="description" content="Toque ou deixe a música tocando e veja o tom, o campo harmônico, as progressões e os acordes. Grátis, no navegador, sem cadastro.">
-<link rel="canonical" href="https://ledixplugins.com.br/auratone/app/">
+<link rel="canonical" href="https://tone.ledixplugins.com.br/">
 <script defer src="/assets/stats.js?v=3"></script>
-<link rel="icon" href="https://ledixplugins.com.br/assets/auratone-icon.svg?v=1" type="image/svg+xml"><link rel="apple-touch-icon" href="https://ledixplugins.com.br/assets/auratone-apple-touch.png?v=1">
+<link rel="apple-touch-icon" href="https://ledixplugins.com.br/assets/auratone-apple-touch.png?v=1">
+<meta name="description" content="Toque ou deixe a música tocando e veja o tom, o campo harmônico e os acordes. Grátis, direto no navegador.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AURA Tone">
+<meta property="og:title" content="AURA Tone · descubra o tom da música, grátis">
+<meta property="og:description" content="Toque ou deixe a música tocando e veja o tom e os acordes.">
+<meta property="og:url" content="https://tone.ledixplugins.com.br/">
+<meta property="og:image" content="https://ledixplugins.com.br/assets/auratone-icon-512.png?v=1">
+<meta property="og:image:width" content="512"><meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="https://ledixplugins.com.br/assets/auratone-icon.svg?v=1" type="image/svg+xml">
 <style>
-/* AURA Tone — identidade da família AURA (mesma do Aura Pad):
+/* © 2026 Thiago R. Galvão. Todos os direitos reservados. ID: AURA-TN-TRG-2026
+   AURA Tone — identidade da família AURA (mesma do Aura Pad):
    painel grafite, laterais de madeira, visor OLED ciano, âmbar para o que está ligado, knobs prateados.
    Regra de ouro: tudo cabe na tela, nada rola. Sem backdrop-filter e sem sombras animadas (desempenho). */
 :root{
@@ -159,10 +173,34 @@ main{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:m
 .chip small{display:block;font-size:9px;color:var(--oled-dim);font-weight:500;text-shadow:none}
 .chip.fora{color:#8f7a76;text-shadow:none}
 .vazio-txt{font-size:12px;color:var(--faint);line-height:1.4}
+.about{flex:none;text-align:center;font-size:9.5px;letter-spacing:.08em;color:var(--faint);line-height:1}
+
+/* janela do YouTube */
+.modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:calc(var(--st) + 10px) 10px calc(var(--sb) + 10px);background:rgba(5,5,6,.82)}
+.modal.fechado{inset:auto;left:-9999px;top:0;width:640px;height:520px}
+.sheet{width:min(660px,100%);max-height:100%;display:flex;flex-direction:column;gap:10px;padding:14px;overflow:hidden}
+.sheet-body{display:flex;flex-direction:column;gap:10px;min-height:0}
+.sheet .linha-url{display:flex;gap:8px}
+.sheet input{flex:1;min-width:0;height:40px;padding:0 12px;border-radius:8px;border:1px solid #000;background:var(--well);color:var(--text);font:13px var(--mono);box-shadow:inset 0 2px 6px #000;-webkit-user-select:text;user-select:text}
+.sheet input::placeholder{color:var(--faint)}
+.ytframe{width:min(100%,calc((100dvh - 330px) * 16 / 9));min-width:200px;aspect-ratio:16/9;margin:0 auto;background:#000;border:1px solid #000;border-radius:8px;box-shadow:0 0 0 2px #23252a;overflow:hidden}
+.ytframe iframe{width:100%;height:100%;border:0;display:block}
+.ytnota{font-size:11px;line-height:1.4;color:var(--faint)}
+.sheet .acoes{display:flex;gap:8px;flex-wrap:wrap}
+.sheet .acoes .hw{flex:1 1 140px}
+.ytres{flex:none;min-height:0;padding:7px 12px}
+.ytres .mini{white-space:normal}
 
 /* telas curtas (celular deitado) */
 @media (max-height:460px){
   :root{--gap:6px}
+  .about{display:none}
+  .sheet{padding:8px 10px;gap:6px}
+  .sheet-body{flex-direction:row;align-items:flex-start}
+  .sheet-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .ytframe{width:min(44%,calc((100dvh - 100px) * 16 / 9));flex:none;margin:0}
+  .ytnota{display:none}
+  .sheet input,.sheet .hw{min-height:34px;height:34px}
   body{padding-top:calc(var(--st) + 6px);padding-bottom:calc(var(--sb) + 6px)}
   .brand .sub{display:none}
   .oled{min-height:38px;padding:3px 10px}
@@ -220,6 +258,7 @@ main{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:m
   <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></symbol>
   <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
   <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></symbol>
 </svg>
 <div class="cheek l" aria-hidden="true"></div>
@@ -237,6 +276,7 @@ main{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:m
   <div class="hdr-right">
     <div class="knob-w" id="kSens"><div class="knob" tabindex="0" role="slider" aria-label="Sensibilidade" aria-valuemin="0" aria-valuemax="100"><i class="cap"><i class="ind"></i></i></div><small>Sensib.</small><b class="kv"></b></div>
     <button id="btnZerar" class="hw icon" title="Zerar" aria-label="Zerar"><svg><use href="#i-reset"/></svg></button>
+    <button id="btnLink" class="hw opc" title="Analisar link do YouTube"><svg><use href="#i-link"/></svg><span class="lbl opc">Link</span></button>
     <button id="btnDemo" class="hw opc" title="Testar sem microfone"><svg><use href="#i-play"/></svg><span class="lbl opc">Testar</span></button>
     <button id="btnOuvir" class="hw amber"><svg><use href="#i-mic"/></svg><span class="lbl">Ouvir</span></button>
   </div>
@@ -285,6 +325,22 @@ main{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:m
     </section>
   </div>
 </main>
+<small class="about">AURA Tone · criado por Thiago R. Galvão · © 2026 · Todos os direitos reservados</small>
+
+<div class="modal fechado" id="modalYT" role="dialog" aria-label="Analisar link do YouTube">
+  <div class="panel sheet">
+    <div class="tabhead"><div class="sec-t">YouTube <em>cole o link da música</em></div><button id="ytFechar" class="hw icon" aria-label="Fechar" style="min-height:32px;height:32px;width:32px;min-width:32px"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <div class="sheet-body">
+      <div class="sheet-col">
+        <div class="linha-url"><input id="ytUrl" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=..."><button id="ytCarregar" class="hw">Carregar</button></div>
+        <div class="disp ytres"><small>Resultado</small><div class="mini" id="ytMain" style="color:var(--oled);font-size:13px;font-weight:700">AURA TONE</div><div class="mini" id="ytSub">Cole o link e toque em Carregar</div></div>
+        <div class="acoes"><button id="ytAnalisar" class="hw amber">Analisar áudio</button><button id="ytParar" class="hw">Parar</button></div>
+        <div class="ytnota">O Aura Tone não baixa nem grava o vídeo: ele só escuta o áudio que está tocando nesta aba, como faria com o microfone. No Chrome ou Edge, escolha <b>Esta aba</b> e marque <b>Compartilhar áudio da aba</b>. Deixe a música tocar por 30 s ou mais.</div>
+      </div>
+      <div class="ytframe"><div id="ytPlayer"></div></div>
+    </div>
+  </div>
+</div>
 
 <div id="rotate" aria-live="polite">
   <svg class="rot-ic" viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="6" width="24" height="44" rx="4"/><path d="M29 44h6"/><path d="M8 40a24 24 0 0 0 20 16" /><path d="M24 52l4 4-5 3"/></svg>
@@ -295,12 +351,28 @@ main{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:m
 </div>
 
 <script>
-/* AURA TONE — motor de análise (sem dependências). Funciona no navegador e no Node. */
+/* AURA Tone — motor de análise (sem dependências). Funciona no navegador e no Node.
+   © 2026 Thiago R. Galvão. Todos os direitos reservados. ID: AURA-TN-TRG-2026 */
 var NOMES_SUST = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 var NOMES_BEM = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
 var LETRAS = ['C','D','E','F','G','A','B'];
 var LETRA_PC = [0,2,4,5,7,9,11];
 var SOLFEJO = {C:'Dó',D:'Ré',E:'Mi',F:'Fá',G:'Sol',A:'Lá',B:'Si'};
+
+/* Extrai o ID de 11 caracteres de um link do YouTube (watch, youtu.be, shorts, embed, live, music). */
+function idYoutube(texto){
+  var s = String(texto || '').trim();
+  if (/^[A-Za-z0-9_-]{11}$/.test(s)) return s;
+  var u;
+  try { u = new URL(/^https?:\/\//i.test(s) ? s : 'https://' + s); } catch (e) { return null; }
+  var h = u.hostname.toLowerCase().replace(/^(www\.|m\.|music\.)/, ''), id = null, p;
+  if (h === 'youtu.be') id = u.pathname.split('/')[1];
+  else if (h === 'youtube.com' || h === 'youtube-nocookie.com') {
+    if (u.pathname === '/watch') id = u.searchParams.get('v');
+    else { p = u.pathname.match(/^\/(shorts|embed|live|v)\/([^\/?#]+)/); if (p) id = p[2]; }
+  }
+  return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+}
 
 function mod12(n){ return ((n % 12) + 12) % 12; }
 
@@ -696,13 +768,16 @@ function criarMotor(opcoes){
 <script>
 (function(){
   'use strict';
+  /* © 2026 Thiago R. Galvão. Todos os direitos reservados. ID: AURA-TN-TRG-2026 */
+  var AURA_AUTOR = 'Thiago R. Galvão', AURA_ANO = 2026, AURA_ID = 'AURA-TN-TRG-2026';
+  try { console.log('%cAURA TONE%c © ' + AURA_ANO + ' ' + AURA_AUTOR + ' — todos os direitos reservados', 'font-weight:700;color:#ffab2e', ''); } catch (e) {}
   var $ = function(id){ return document.getElementById(id); };
   var FFT = 16384, PASSO = 50;
   var ctx = null, analyser = null, fonte = null, stream = null, rodando = false, modoDemo = false;
   var motor = criarMotor({ gateDb:-78, frameMs:PASSO });
   var dbBuf, tBuf, ultimoPasso = 0, solfejo = false, sete = false, sens = 66;
   var demoTimer = null, demoNos = [];
-  var tomMostrado = '', nomesCache = '';
+  var tomMostrado = '', nomesCache = '', modoYT = false, ytPlayer = null, ytApi = null, ytId = null;
   var MSG_INICIAL = 'Toque em OUVIR e deixe a música tocar';
 
   /* ---------- ajustes salvos (só preferências) ---------- */
@@ -741,14 +816,15 @@ function criarMotor(opcoes){
   function rotulosChroma(){ for (var i = 0; i < 12; i++) rotulos[i].textContent = fmt(NOMES_SUST[i]); }
 
   /* ---------- visor do cabeçalho ---------- */
-  function msg(t, erro){ var s = $('oledSub'); if (s.textContent !== t) { s.textContent = t; s.title = t; } s.className = erro ? 'err' : ''; }
-  function oledPrincipal(t){ var b = $('oledMain'); if (b.textContent !== t) b.textContent = t; }
+  function msg(t, erro){ var s = $('oledSub'); if (s.textContent !== t) { s.textContent = t; s.title = t; } s.className = erro ? 'err' : ''; var y = $('ytSub'); y.textContent = t; y.style.color = erro ? '#ff8a70' : ''; }
+  function oledPrincipal(t){ var b = $('oledMain'); if (b.textContent !== t) { b.textContent = t; $('ytMain').textContent = t; } }
   function botoes(){
     var on = rodando;
     var o = $('btnOuvir'); o.classList.toggle('on', on); o.querySelector('.lbl').textContent = on ? 'Parar' : 'Ouvir';
     o.querySelector('use').setAttribute('href', on ? '#i-stop' : '#i-mic');
     var dm = $('btnDemo'); dm.classList.toggle('toggle', true); dm.classList.toggle('on', on && modoDemo);
     dm.querySelector('.lbl').textContent = (on && modoDemo) ? 'Parar teste' : 'Testar';
+    var lk = $('btnLink'); lk.classList.toggle('toggle', true); lk.classList.toggle('on', on && modoYT);
   }
 
   /* ---------- áudio ---------- */
@@ -768,7 +844,8 @@ function criarMotor(opcoes){
     demoNos.forEach(function(n){ try { n.stop(); } catch(e){} }); demoNos = [];
     if (fonte) { try { fonte.disconnect(); } catch(e){} fonte = null; }
     if (stream) { stream.getTracks().forEach(function(t){ t.stop(); }); stream = null; }
-    rodando = false; modoDemo = false; botoes();
+    if (modoYT && ytPlayer) { try { ytPlayer.pauseVideo(); } catch(e){} }
+    rodando = false; modoDemo = false; modoYT = false; botoes();
     $('oledLed').className = 'led';
   }
   function ouvir(){
@@ -780,7 +857,7 @@ function criarMotor(opcoes){
     navigator.mediaDevices.getUserMedia({ audio:{ echoCancellation:false, noiseSuppression:false, autoGainControl:false, channelCount:1 } })
       .then(function(s){
         stream = s; fonte = ctx.createMediaStreamSource(s); fonte.connect(analyser);
-        rodando = true; modoDemo = false; motor.zerar(); tomMostrado = ''; botoes();
+        rodando = true; modoDemo = false; modoYT = false; motor.zerar(); tomMostrado = ''; botoes();
         msg('Ouvindo… deixe a música tocar');
         requestAnimationFrame(laco);
       })
@@ -821,6 +898,63 @@ function criarMotor(opcoes){
     rodando = true; modoDemo = true; motor.zerar(); tomMostrado = ''; botoes();
     msg('Teste: tocando uma progressão de exemplo');
     requestAnimationFrame(laco);
+  }
+
+  /* ---------- link do YouTube ---------- */
+  function abrirLink(){ $('modalYT').classList.remove('fechado'); setTimeout(function(){ try { $('ytUrl').focus(); } catch(e){} }, 50); }
+  function fecharLink(){ $('modalYT').classList.add('fechado'); }
+  function carregarApiYT(){
+    if (ytApi) return ytApi;
+    ytApi = new Promise(function(res, rej){
+      if (window.YT && window.YT.Player) { res(); return; }
+      var ant = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function(){ if (ant) try { ant(); } catch(e){} res(); };
+      var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api';
+      s.onerror = function(){ ytApi = null; rej(new Error('api')); };
+      document.head.appendChild(s);
+      setTimeout(function(){ if (!(window.YT && window.YT.Player)) { ytApi = null; rej(new Error('tempo')); } }, 12000);
+    });
+    return ytApi;
+  }
+  function carregarVideo(){
+    var id = idYoutube($('ytUrl').value);
+    if (!id) { msg('Link do YouTube não reconhecido', true); return Promise.resolve(false); }
+    msg('Carregando o vídeo…');
+    return carregarApiYT().then(function(){
+      return new Promise(function(res){
+        ytId = id;
+        if (ytPlayer) { try { ytPlayer.cueVideoById(id); } catch(e){} msg('Vídeo carregado. Toque em Analisar áudio'); res(true); return; }
+        ytPlayer = new YT.Player('ytPlayer', { videoId:id, width:'100%', height:'100%', playerVars:{ playsinline:1, rel:0, modestbranding:1 },
+          events:{ onReady:function(){ msg('Vídeo carregado. Toque em Analisar áudio'); res(true); },
+                   onError:function(){ msg('Este vídeo não pode ser tocado aqui. Tente outro link.', true); res(false); } } });
+      });
+    }).catch(function(){ msg('Não consegui carregar o player do YouTube. Confira a internet.', true); return false; });
+  }
+  function analisarYT(){
+    var pronto = (ytId && ytId === idYoutube($('ytUrl').value) && ytPlayer) ? Promise.resolve(true) : carregarVideo();
+    pronto.then(function(ok){
+      if (!ok) return;
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+        msg('Este aparelho não permite capturar o áudio da aba. Toque o vídeo em outro aparelho e use OUVIR.', true); return;
+      }
+      if (rodando) pararFonte();
+      criarCtx();
+      return navigator.mediaDevices.getDisplayMedia({ video:true, audio:{ echoCancellation:false, noiseSuppression:false, autoGainControl:false },
+          preferCurrentTab:true, selfBrowserSurface:'include', systemAudio:'include' })
+        .then(function(s){
+          var at = s.getAudioTracks();
+          if (!at.length) { s.getTracks().forEach(function(t){ t.stop(); }); msg('Sem áudio. Escolha ESTA ABA e marque "Compartilhar áudio da aba".', true); return; }
+          stream = s; fonte = ctx.createMediaStreamSource(new MediaStream(at)); fonte.connect(analyser);
+          rodando = true; modoDemo = false; modoYT = true; motor.zerar(); tomMostrado = ''; botoes();
+          at[0].addEventListener('ended', function(){ if (modoYT) { pararFonte(); msg('Captura encerrada.'); } });
+          msg('Aguardando o áudio… aperte play no vídeo');
+          try { ytPlayer.seekTo(0, true); ytPlayer.playVideo(); } catch(e){}
+          requestAnimationFrame(laco);
+        });
+    }).catch(function(e){
+      var neg = e && (e.name === 'NotAllowedError' || e.name === 'AbortError');
+      msg(neg ? 'Captura cancelada. Toque em Analisar áudio e permita.' : 'Não consegui capturar o áudio desta aba.', true);
+    });
   }
 
   /* ---------- laço principal ---------- */
@@ -864,9 +998,10 @@ function criarMotor(opcoes){
     }
     desenharTom(); desenharCampo(); desenharTocados();
     oledPrincipal(motor.tom ? 'TOM ' + nomeTom(motor.tom).toUpperCase() + (motor.acorde ? ' · ' + nomeAcordeTom(motor.acorde.raiz, motor.acorde.q) : '') : 'AURA TONE');
-    if (!r.sinal && motor.tempoSinalMs === 0 && !modoDemo) msg('Ouvindo… chegue mais perto do som');
+    if (!r.sinal && motor.tempoSinalMs === 0 && modoYT) msg('Aguardando o áudio… aperte play no vídeo');
+    else if (!r.sinal && motor.tempoSinalMs === 0 && !modoDemo) msg('Ouvindo… chegue mais perto do som');
     else if (!motor.tom && motor.tempoSinalMs > 0) msg('Ouvindo… ' + Math.floor(motor.tempoSinalMs / 1000) + ' s de áudio');
-    else if (motor.tom) msg(modoDemo ? 'Teste: progressão de exemplo' : 'Tom identificado');
+    else if (motor.tom) msg(modoDemo ? 'Teste: progressão de exemplo' : (modoYT ? 'YouTube: ' + Math.floor(motor.tempoSinalMs / 1000) + ' s analisados' : 'Tom identificado'));
   }
 
   function desenharTom(){
@@ -975,6 +1110,14 @@ function criarMotor(opcoes){
   /* ---------- botões ---------- */
   $('btnOuvir').onclick = ouvir;
   $('btnDemo').onclick = demo;
+  $('btnLink').onclick = abrirLink;
+  $('ytFechar').onclick = fecharLink;
+  $('ytCarregar').onclick = carregarVideo;
+  $('ytAnalisar').onclick = analisarYT;
+  $('ytParar').onclick = function(){ if (rodando) { pararFonte(); msg('Parado.'); } };
+  $('ytUrl').addEventListener('keydown', function(e){ if (e.key === 'Enter') carregarVideo(); });
+  $('modalYT').addEventListener('pointerdown', function(e){ if (e.target === $('modalYT') && !$('modalYT').classList.contains('fechado')) fecharLink(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') fecharLink(); });
   $('btnZerar').onclick = function(){
     motor.zerar(); tomMostrado = ''; nomesCache = ''; construirCampo(); construirProgs();
     $('tocados').innerHTML = '<span class="vazio-txt">Os acordes detectados aparecem aqui, com o grau no tom.</span>';
